@@ -1,0 +1,35 @@
+Que fait un fork au niveau du système d'exploitation ?
+
+Lors de l'exécution de l'appel-système fork, le noyau effectue les opérations suivantes :
+
+il alloue un bloc de contrôle dans la table des processus.
+il copie les informations contenues dans le bloc de contrôle du père dans celui du fils sauf les identificateurs (PID, PPID...).
+il alloue un PID au processus fils.
+il associe au processus fils un segment de texte dans son espace d'adressage. Le segment de données et la pile ne lui seront attribués uniquement lorsque celui-ci tentera de les modifier. Cette technique, nommée « copie on write », permet de réduire le temps de création du processus.
+l'état du processus est mis à l'état exécution.
+
+	-->	http://www.commentcamarche.net/faq/10611-que-fait-un-fork
+
+	// int		main(int argc, char **argv, char **envp)
+	// {
+	// 	char	*name;
+	// 	char	*path;
+	// 	char	*arg;
+	// 	int		bool_arg;
+	// 	char	**t_arg;
+	//
+	// 	get_next_line(0, &name);
+	// 	if ((arg = ft_strrchr(name, ' ')))
+	// 	{
+	// 		name = ft_strsub(name, 0, arg - name);
+	// 		printf("arg = %s\n", t_arg[0]);
+	// 	}
+	// 	char	*test[] = {name, *t_arg, NULL};
+	// 	path = ft_strjoin("/bin/", name);
+	// 	ft_putendl(path);
+	// 	if (execve(path, test, envp) == -1)
+	// 	{
+	// 		perror("minishell :");
+	// 	}
+	// 	return (0);
+	// }
