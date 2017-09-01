@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/08/31 20:16:00 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/01 16:42:06 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,28 @@
 
 int		main(int argc, char **argv, char **env)
 {
-	pid_t	father;
 	char	*line;
-	char	**command;
-	char	*env_var;
+	pid_t	pid;
+	(void)argc;
+	(void)argv;
 
+	pid = fork();
 	while (42)
 	{
-	if ((env_var = find_env(env,  argv[1])))
-	{
-		path_command(argv[2], env_var);
-	}
+		if (pid == 0)
+		{
+			wait(NULL);
+			ft_putstr("$> ");
+			get_next_line(0, &line);
+			process(env, line);
+		}
+		else if (pid < 0)
+			perror("minishell error");
+		else
+		{
+			wait(&pid);
+			main(argc, argv, env);
+		}
 	}
 	return (0);
 }
