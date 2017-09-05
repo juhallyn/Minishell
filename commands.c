@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/01 15:56:00 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/05 16:10:08 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,23 @@ void		process(char **env, char *line)
 	char	*env_var;
 	char	*command_path;
 	char	**command;
+	pid_t	pid;
+	int		ret;
 
 	command_path = NULL;
 	command = ft_strsplit(parse_line(line), ' ');
 	if ((env_var = find_env(env, "PATH")))
 		command_path = path_command(command[0], env_var);
-	if (!command_path)
-		ft_error(command[0]);
-	if (execve(command_path, command, env) == -1)
-		ft_error(command[0]);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (!command_path)
+			ft_error(command[0]);
+		if ((ret = execve(command_path, command, env) == -1))
+			ft_error(command[0]);
+	}
+	else
+		wait(&pid);
 	ft_strsplit_del(&command);
 	ft_strdel(&command_path);
 	ft_strdel(&line);
@@ -33,7 +41,6 @@ void		process(char **env, char *line)
 
 char		*path_command(char *command, char *env_path)
 {
-	char	*memory;
 	char	**all_paths;
 	char	*command_path;
 	int		i;

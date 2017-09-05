@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/05 18:14:05 by juhallyn         ###   ########.fr       */
+/*   Created: 2017/09/05 18:08:16 by juhallyn          #+#    #+#             */
+/*   Updated: 2017/09/05 18:31:21 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
-int		main(int argc, char **argv, char **env)
-{
-	char	*line;
-	char	**my_env;
-	(void)argc;
-	(void)argv;
-	int i = 0;
-
-	my_env = env_cpy(env);
-	while (42)
-	{
-		ft_putstr("†> ");
-		get_next_line(0, &line);
-		process(env, line);
-	}
-	return (0);
-}
+// t_env	*add_end(t_env *env, char *data)
+// {
+// 	t_env	*node;
+//
+// 	node = (t_env*)malloc(sizeof(t_env));
+// 	node->data = data;
+// 	if (!node)
+// 		exit(-1);
+// 	while (env)
+// 		env = env->next;
+//
+// }
