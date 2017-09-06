@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/06 18:10:35 by juhallyn         ###   ########.fr       */
+/*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
+/*   Updated: 2017/09/06 18:31:52 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
-int		main(int argc, char **argv, char **env)
+t_bool		is_builtins(char *cmd)
 {
-	char	*line;
-	char	**my_env;
-	(void)argc;
-	(void)argv;
+	char	*builtins;
+	char	**builtins_list;
+	int		i;
+	(void)cmd;
 
-	my_env = NULL;
-	my_env = env_cpy(env);
-	while (42)
+	i = 0;
+	builtins = "cd,echo,exit,setenv,unsetenv";
+	builtins_list = ft_strsplit(builtins, ',');
+	while (builtins_list[i])
 	{
-		ft_putstr("$> ");
-		get_next_line(0, &line);
-		process(my_env, line);
+		if (ft_strcmp(builtins_list[i], cmd) == 0)
+			return (true);
+		i++;
 	}
-	return (0);
+	return (false);
+}
+
+void		exec_builtins(char **cmd)
+{
 }

@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/05 18:15:14 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/06 18:31:20 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ typedef	enum	e_bool
 	true = 1
 }				t_bool;
 
-typedef struct		s_env
-{
-	char			*data;
-	struct 	s_env	*next;
-}					t_env;
-
 /*
 **	--	check and process functions --
 **		--> command.c
@@ -45,6 +39,14 @@ char			*path_command(char *command, char *env_path);
 
 char			*find_env(char **env, char *var_name);
 char			**env_cpy(char **env);
+
+/*
+**	--	builtins functions --
+**		--> builtins.c
+*/
+
+t_bool			is_builtins(char *cmd);
+void			exec_builtins(char **cmd);
 
 /*
 **	--	Useless functions --
