@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/06 18:29:39 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/06 19:00:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void		process(char **env, char *line)
 	if (builtins == false)
 		ft_fork(command, command_path, env);
 	else
-	{
-		exec_builtins(command);
-	}
+		exec_builtins(command, env);
 	ft_strsplit_del(&command);
 	ft_strdel(&command_path);
 	ft_strdel(&line);

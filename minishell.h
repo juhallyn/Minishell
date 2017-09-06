@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/06 18:31:20 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/06 19:00:28 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char			**env_cpy(char **env);
 */
 
 t_bool			is_builtins(char *cmd);
-void			exec_builtins(char **cmd);
+void			exec_builtins(char **cmd, char **env);
 
 /*
 **	--	Useless functions --
