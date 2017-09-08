@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/06 19:10:26 by juhallyn         ###   ########.fr       */
+/*   Created: 2017/09/05 18:08:16 by juhallyn          #+#    #+#             */
+/*   Updated: 2017/09/06 15:49:58 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
-int		main(int argc, char **argv, char **env)
+t_env	*add_end(t_env *env, char *data)
 {
-	char	*line;
-	char	**my_env;
-	(void)argc;
-	(void)argv;
+	t_env	*node;
+	t_env	*tmp;
 
-	my_env = NULL;
-	my_env = env_cpy(env);
-	while (42)
-	{
-		ft_putstr("$> ");
-		get_next_line(0, &line);
-		process(my_env, line);
-	}
-	return (0);
+	tmp = env;
+	node = (t_env*)malloc(sizeof(t_env));
+	if (!node)
+		exit(-1);
+	node->data = ft_strdup(data);
+	node->next = NULL;
+	if (!env)
+		return (node);
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = node;
+	return (env);
 }

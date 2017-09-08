@@ -10,26 +10,26 @@ l'état du processus est mis à l'état exécution.
 
 	-->	http://www.commentcamarche.net/faq/10611-que-fait-un-fork
 
-	// int		main(int argc, char **argv, char **envp)
-	// {
-	// 	char	*name;
-	// 	char	*path;
-	// 	char	*arg;
-	// 	int		bool_arg;
-	// 	char	**t_arg;
-	//
-	// 	get_next_line(0, &name);
-	// 	if ((arg = ft_strrchr(name, ' ')))
-	// 	{
-	// 		name = ft_strsub(name, 0, arg - name);
-	// 		printf("arg = %s\n", t_arg[0]);
-	// 	}
-	// 	char	*test[] = {name, *t_arg, NULL};
-	// 	path = ft_strjoin("/bin/", name);
-	// 	ft_putendl(path);
-	// 	if (execve(path, test, envp) == -1)
-	// 	{
-	// 		perror("minishell :");
-	// 	}
-	// 	return (0);
-	// }
+
+
+-----------------------------------------------------------------------------
+
+to do :
+
+execute prog "./"
+
+---------------------------- builtins ---------------------------------------
+
+
+						-- permission --
+
+		ouvrir un repertoire -> 'x' permission
+		afficher contenue	 -> 'r' permission
+		modifier			 -> 'w' permission
+
+
+categorie {
+	
+	cd = 'x'
+	
+}

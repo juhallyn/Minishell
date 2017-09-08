@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/06 19:06:49 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/08 15:25:07 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,36 @@ t_bool		is_builtins(char *cmd)
 	while (builtins_list[i])
 	{
 		if (ft_strcmp(builtins_list[i], cmd) == 0)
+		{
+			ft_strsplit_del(&builtins_list);
 			return (true);
+		}
 		i++;
 	}
+	ft_strsplit_del(&builtins_list);
 	return (false);
 }
 
 void		exec_builtins(char **cmd, char **env)
 {
 	char	*home;
+	char	*path;
 
+	path = NULL;
 	home = find_env(env, "HOME");
 	if (ft_strcmp(cmd[0], "cd") == 0)
 	{
 		if (cmd[1])
-			chdir(cmd[1]);
+		{
+			check_alias(cmd[1], &path, env);
+			if (chdir(path) == -1)
+				check_permission(cmd[0], path, 'x');
+		}
 		else
 		{
-			
-			chdir(home);
+			if (chdir(home) == -1)
+				check_permission(cmd[0], cmd[1], 'x');
 		}
 	}
+	ft_strdel(&path);
 }
