@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 14:23:04 by juhallyn         ###   ########.fr       */
+/*   Created: 2017/09/11 13:47:32 by juhallyn          #+#    #+#             */
+/*   Updated: 2017/09/11 13:54:20 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
-int		main(int argc, char **argv, char **env)
+void	change_directory(char *argv, char **env)
 {
-	char	*line;
-	char	**my_env;
-	(void)argc;
-	(void)argv;
+	char	*home;
 
-	my_env = NULL;
-	line = NULL;
-	my_env = env_cpy(env);
-	while (42)
+	home = find_env(env, "HOME");
+	if (argv)
 	{
-		ft_putstr("$> ");
-		get_next_line(0, &line);
-		process(my_env, line);
+		if (check_permission("cd" ,argv, 'x') != -1)
+			chdir(argv);
 	}
-	return (0);
+	else
+	{
+		if (check_permission("cd", home, 'x') != -1)
+			chdir(home);
+	}
 }

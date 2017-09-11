@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:38:07 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/08 11:22:29 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/11 15:34:09 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ char	*creat_path(char *argv, char *d_name)
 char	*parse_line(char *line)
 {
 	while (*line == ' ' || (*line >= '\t' && *line <= '\r'))
-	(void)*line++;
+		(void)*line++;
 	return (line);
 }

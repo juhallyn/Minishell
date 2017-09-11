@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 11:00:12 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/08 13:11:52 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/11 13:41:23 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,22 @@ t_bool	permission_bool(struct stat *buff, char permission)
 
 int		check_permission(char *cmd, char *file_name, char cmd_permissions)
 {
+	DIR		*dir;
 	struct	stat buff;
 	char	*error;
 
-	error = ": permission denied: ";
-	if (lstat(file_name, &buff) == 0)
+	dir = opendir(file_name);
+	if (!dir)
 	{
-		if (permission_bool(&buff, cmd_permissions) == false)
-			print_error(cmd, error, file_name);
+		if (lstat(file_name, &buff) != 0)
+			print_error(cmd, " : no such file or directory: ", file_name);
+		else
+		{
+			if (permission_bool(&buff, cmd_permissions) == false)
+				print_error(cmd, " : permission denied: ", file_name);
+		}
+		return (-1);
 	}
-	else
-		print_error(cmd, " : no such file or directory: ", file_name);
+	closedir(dir);
 	return (0);
 }

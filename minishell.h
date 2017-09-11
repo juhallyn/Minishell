@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/08 15:26:04 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/11 16:13:22 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,21 @@ char			*find_env(char **env, char *var_name);
 char			**env_cpy(char **env);
 
 /*
-**	--	builtins functions --
+**	--	run builtins functions --
 **		--> builtins.c
+**
 */
 
 t_bool			is_builtins(char *cmd);
 void			exec_builtins(char **cmd, char **env);
+
+/*
+**	all builtins command are in "builtins"
+**		folder with $builtin_name.c
+*/
+
+void			change_directory(char *argv, char **env);
+char			**ft_setenv(char *name, char *value, char **env, int nb_arg);
 
 /*
 **	--	error functions --
@@ -59,15 +68,6 @@ int				check_permission(char *cmd, char *file_name, char cmd_permissions);
 t_bool			permission_bool(struct stat *buff, char permission);
 
 /*
-**	--	check alias --
-**		--> alias.c
-*/
-
-// char			*replace_special_char(char *path, int i, char *var);
-// char			*check_alias(char *src, char **path, char **env);
-void			check_alias(char *src, char **path, char **env);
-
-/*
 **	--	Useless functions --
 **		--> tools.c
 */
@@ -77,5 +77,13 @@ void			ft_strsplit_del(char ***tab);
 char			*join(char *command_path, char *env_path, char *command);
 char			*parse_line(char *line);
 char			*creat_path(char *argv, char *d_name);
+
+/*
+**	--	Useless functions --
+**		--> tools2.c
+*/
+
+int				count_arg_cmd(char **cmd);
+void			print_env(char **env);
 
 #endif
