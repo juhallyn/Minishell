@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 14:10:57 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/11 18:12:07 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		ft_fork(char **cmd, char *command_path, char **env)
 	 	wait(&pid);
 }
 
-void		process(char **env, char *line)
+void		process(char ***env, char *line)
 {
 	char	*env_var;
 	char	*command_path;
@@ -42,10 +42,10 @@ void		process(char **env, char *line)
 	command_path = NULL;
 	command = ft_strsplit(parse_line(line), ' ');
 	builtins = is_builtins(command[0]);
-	if ((env_var = find_env(env, "PATH")))
+	if ((env_var = find_env(*env, "PATH")))
 		command_path = path_command(command[0], env_var);
 	if (builtins == false)
-		ft_fork(command, command_path, env);
+		ft_fork(command, command_path, *env);
 	else
 		exec_builtins(command, env);
 	ft_strsplit_del(&command);

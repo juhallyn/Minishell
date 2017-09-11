@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 16:13:22 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/11 18:12:23 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef	enum	e_bool
 **		--> command.c
 */
 
-void			process(char **env, char *line);
+void			process(char ***env, char *line);
 char			*path_command(char *command, char *env_path);
 
 /*
@@ -48,7 +48,7 @@ char			**env_cpy(char **env);
 */
 
 t_bool			is_builtins(char *cmd);
-void			exec_builtins(char **cmd, char **env);
+void			exec_builtins(char **cmd, char ***env);
 
 /*
 **	all builtins command are in "builtins"
@@ -85,5 +85,6 @@ char			*creat_path(char *argv, char *d_name);
 
 int				count_arg_cmd(char **cmd);
 void			print_env(char **env);
+char			*join_env_data(char *name, char *value);
 
 #endif

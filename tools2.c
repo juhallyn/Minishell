@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 15:34:46 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 16:53:42 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/11 17:57:38 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,18 @@ int		count_arg_cmd(char **cmd)
 	while (cmd[i])
 		i++;
 	return (i - 1);
+}
+
+char	*join_env_data(char *name, char *value)
+{
+	char	*data;
+	char	*memory;
+
+	memory = NULL;
+	data = ft_strnew(ft_strlen(name) + ft_strlen(value) + 1);
+	data = ft_strjoin(name, "=");
+	memory = data;
+	data = ft_strjoin(data, value);
+	ft_strdel(&memory);
+	return (data);
 }
