@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 15:34:46 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 17:57:38 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/12 15:18:41 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ int		count_arg_cmd(char **cmd)
 char	*join_env_data(char *name, char *value)
 {
 	char	*data;
-	char	*memory;
+	int		len;
 
-	memory = NULL;
-	data = ft_strnew(ft_strlen(name) + ft_strlen(value) + 1);
-	data = ft_strjoin(name, "=");
-	memory = data;
-	data = ft_strjoin(data, value);
-	ft_strdel(&memory);
+	len = (ft_strlen(name) + ft_strlen(value) + 1);
+	data = (char*)malloc(sizeof(char) * len + 1);
+	if (!data)
+		exit(-1);
+	data = ft_strcpy(data, name);
+	data = ft_strcat(data, "=");
+	data = ft_strcat(data, value);
 	return (data);
 }

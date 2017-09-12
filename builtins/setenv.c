@@ -6,56 +6,51 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 14:46:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 18:19:38 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/12 15:47:23 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		**add_env_var(char *name, char *value, char **env)
+char	**add_variable(char *name, char *value, char **env)
 {
-	int		len;
-	int		i;
 	char	**new_env;
-	char	*data;
+	int		i;
 
-	data = join_env_data(name, value);
 	i = 0;
-	len = 0;
-	while (env[len])
-		len++;
-	new_env = (char**)malloc(sizeof(char*) * len + 2);
-	while (i < len)
+	while (env[i])
+		i++;
+	new_env = (char**)malloc(sizeof(char*) * i + 2);
+	if (!new_env)
+		exit(-1);
+	i = 0;
+	while (env[i])
 	{
 		new_env[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new_env[i++] = data;
+	new_env[i++] = ft_strdup(name);
 	new_env[i++] = NULL;
-	ft_strsplit_del(&env);
-	ft_strdel(&data);
-	// print_env(new_env);
+	// ft_strsplit_del(&env);
 	return (new_env);
 }
 
-// static char		**modif_env_var(char *name, char *value, char **env)
-// {
-//
-// }
-
-char			**ft_setenv(char *name, char *value, char **env, int nb_arg)
+void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
 {
 	char	**new_env;
 
-	new_env = env;
+	new_env = NULL;
 	if (nb_arg > 2)
 		ft_putendl_fd("setenv : Too many arguments.", 2);
 	if (nb_arg == 0)
-		print_env(env);
+		print_env(*env);
 	else if (nb_arg == 2)
 	{
-		if (!find_env(env, name))
-			new_env = add_env_var(name, value, env);
+		if (!find_env(*env, name))
+		{
+			new_env = add_variable(name, value, *env);
+			ft_strsplit_del(env);
+			*env = new_env;
+		}
 	}
-	return (new_env);
 }

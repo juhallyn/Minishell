@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 18:12:23 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/12 15:38:35 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char			**env_cpy(char **env);
 */
 
 t_bool			is_builtins(char *cmd);
+// void			exec_builtins(char **cmd, char ***env);
 void			exec_builtins(char **cmd, char ***env);
 
 /*
@@ -56,7 +57,9 @@ void			exec_builtins(char **cmd, char ***env);
 */
 
 void			change_directory(char *argv, char **env);
-char			**ft_setenv(char *name, char *value, char **env, int nb_arg);
+void			ft_setenv(char *name, char *value, char ***env, int nb_arg);
+// void			add_env_var(char *name, char *value, char ***env);
+char			**add_variable(char *name, char *value, char **env);
 
 /*
 **	--	error functions --
