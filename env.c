@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:37:00 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/06 19:10:31 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/14 16:41:53 by jle-quel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ char			*find_env(char **env, char *var_name)
 	char	*find;
 	int		i;
 	int		len;
+	char	*new;
 
 	len = 0;
 	i = 0;
+	if (!env)
+		return (NULL);
 	if ((find = cmp_string_env(var_name)))
 		len = ft_strlen(find);
 	while (env[i])
@@ -57,7 +60,8 @@ char			*find_env(char **env, char *var_name)
 		if (ft_strncmp(find, env[i], len) == 0)
 		{
 			ft_strdel(&find);
-			return (&env[i][len]);
+			new = ft_strdup(&env[i][len]);
+			return (new);
 		}
 		i++;
 	}

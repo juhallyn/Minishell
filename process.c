@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 18:12:07 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/14 16:45:00 by jle-quel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void		ft_fork(char **cmd, char *command_path, char **env)
 	 pid_t	pid;
 	 int	ret;
 
+	 if (env)
+	 {
 	 pid = fork();
 	 if (pid == 0)
 	 {
@@ -28,7 +30,9 @@ static void		ft_fork(char **cmd, char *command_path, char **env)
 	 }
 	 else
 	 	wait(&pid);
+	 }
 }
+void	ft_arraydel(char ***array);
 
 void		process(char ***env, char *line)
 {
@@ -39,7 +43,6 @@ void		process(char ***env, char *line)
 
 	if (ft_strlen(line) == 0)
 		return ;
-	command_path = NULL;
 	command = ft_strsplit(parse_line(line), ' ');
 	builtins = is_builtins(command[0]);
 	if ((env_var = find_env(*env, "PATH")))
@@ -48,9 +51,9 @@ void		process(char ***env, char *line)
 		ft_fork(command, command_path, *env);
 	else
 		exec_builtins(command, env);
-	ft_strsplit_del(&command);
+	ft_strdel(&env_var);
+	ft_arraydel(&command);
 	ft_strdel(&command_path);
-	ft_strdel(&line);
 }
 
 char		*path_command(char *command, char *env_path)
@@ -69,12 +72,12 @@ char		*path_command(char *command, char *env_path)
 		command_path = join(command_path, all_paths[i], command);
 		if (access(command_path, F_OK) == 0)
 		{
-			ft_strsplit_del(&all_paths);
+			ft_arraydel(&all_paths);
 			return (command_path);
 		}
 		i++;
 	}
 	ft_strdel(&command_path);
-	ft_strsplit_del(&all_paths);
+	ft_arraydel(&all_paths);
 	return (NULL);
 }

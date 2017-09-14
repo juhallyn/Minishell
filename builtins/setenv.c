@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 14:46:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/12 15:47:23 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/14 17:13:19 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	**add_variable(char *name, char *value, char **env)
 	i = 0;
 	while (env[i])
 		i++;
+	i++;
 	new_env = (char**)malloc(sizeof(char*) * i + 2);
 	if (!new_env)
 		exit(-1);
@@ -29,15 +30,15 @@ char	**add_variable(char *name, char *value, char **env)
 		new_env[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new_env[i++] = ft_strdup(name);
-	new_env[i++] = NULL;
-	// ft_strsplit_del(&env);
+	new_env[i] = ft_strdup(name);
+	new_env[i + 1] = NULL;
 	return (new_env);
 }
 
 void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
 {
 	char	**new_env;
+	char	**tmp;
 
 	new_env = NULL;
 	if (nb_arg > 2)
@@ -46,11 +47,12 @@ void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
 		print_env(*env);
 	else if (nb_arg == 2)
 	{
-		if (!find_env(*env, name))
+		if (!(find_env(*env, name)))
 		{
-			new_env = add_variable(name, value, *env);
-			ft_strsplit_del(env);
-			*env = new_env;
+			tmp = *env;
+			*env = add_variable(name, value, *env);
+			ft_arraydel(&tmp);
+			tmp = NULL;
 		}
 	}
 }
