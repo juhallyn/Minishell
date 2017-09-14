@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:37:00 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/14 16:41:53 by jle-quel         ###   ########.fr       */
+/*   Updated: 2017/09/14 20:10:02 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ char			**env_cpy(char **env)
 	int		i;
 	char	**my_env;
 
-	i = 0;
 	my_env = NULL;
-	while (env[i])
-		i++;
+	i = ft_arraylen(env) + 1;
 	my_env = (char**)malloc(sizeof(char*) * i + 1);
 	if (!my_env)
 		exit(-1);
