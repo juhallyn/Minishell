@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 15:34:46 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/12 15:18:41 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/15 12:48:49 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*join_env_data(char *name, char *value)
 		exit(-1);
 	data = ft_strcpy(data, name);
 	data = ft_strcat(data, "=");
-	data = ft_strcat(data, value);
+	if (value)
+		data = ft_strcat(data, value);
 	return (data);
 }

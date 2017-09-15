@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 14:46:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/14 18:04:25 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/15 12:49:02 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**add_variable(char *name, char *value, char **env)
 
 	data = join_env_data(name, value);
 	i = ft_arraylen(env) + 1;
-	new_env = (char**)malloc(sizeof(char*) * i + 8);
+	new_env = (char**)malloc(sizeof(char*) * (i + 1));
 	if (!new_env)
 		exit(-1);
 	i = 0;
@@ -34,6 +34,25 @@ char	**add_variable(char *name, char *value, char **env)
 	return (new_env);
 }
 
+char	**modif_variable(char *name, char *value, char **env)
+{
+	int		i;
+	char	*data;
+
+	i = 0;
+	data = join_env_data(name, value);
+	while (env[i])
+	{
+		if (ft_strncmp(name, env[i], ft_strlen(name)) == 0)
+		{
+			free(env[i]);
+			env[i] = data;
+		}
+		i++;
+	}
+	return (env);
+}
+
 void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
 {
 	char	**tmp;
@@ -42,7 +61,7 @@ void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
 		ft_putendl_fd("setenv : Too many arguments.", 2);
 	if (nb_arg == 0)
 		print_env(*env);
-	else if (nb_arg == 2)
+	else if (nb_arg == 2 || nb_arg == 1)
 	{
 		if (!(find_env(*env, name)))
 		{
@@ -51,5 +70,7 @@ void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
 			ft_arraydel(&tmp);
 			tmp = NULL;
 		}
+		else
+			modif_variable(name, value, *env);
 	}
 }

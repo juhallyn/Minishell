@@ -6,14 +6,11 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/14 19:42:54 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/15 12:18:56 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_arraydel(char ***array);
-
 
 t_bool		is_builtins(char *cmd)
 {
@@ -55,6 +52,9 @@ void		exec_builtins(char **cmd, char ***env)
 	{
 		if (!cmd[1])
 			print_env(*env);
-		ft_setenv(cmd[1], cmd[2], env, nb_arg);
+		if (cmd[1])
+		{
+			ft_setenv(cmd[1], cmd[2], env, nb_arg);
+		}
 	}
 }
