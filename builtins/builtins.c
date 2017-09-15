@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/15 12:18:56 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/15 16:34:10 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ void		exec_builtins(char **cmd, char ***env)
 	int		nb_arg;
 
 	nb_arg = count_arg_cmd(cmd);
-	if (nb_arg == 0)
-	{
-		cmd[1] = NULL;
-		// cmd[2] = NULL;
-	}
 	if (ft_strcmp(cmd[0], "cd") == 0)
 		change_directory(cmd[1], *env);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
@@ -53,8 +48,13 @@ void		exec_builtins(char **cmd, char ***env)
 		if (!cmd[1])
 			print_env(*env);
 		if (cmd[1])
-		{
 			ft_setenv(cmd[1], cmd[2], env, nb_arg);
-		}
+	}
+	if (ft_strcmp(cmd[0], "unsetenv") == 0)
+	{
+		if (!cmd[1])
+			ft_putendl_fd("unsetenv: Too few arguments.", 2);
+		else
+			ft_unsetenv(cmd, env, nb_arg);
 	}
 }

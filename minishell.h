@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/14 17:14:53 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/15 16:34:48 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ char			**env_cpy(char **env);
 /*
 **	--	run builtins functions --
 **		--> builtins.c
-**
-*/
+**/
 
 t_bool			is_builtins(char *cmd);
 void			exec_builtins(char **cmd, char ***env);
@@ -58,6 +57,10 @@ void			exec_builtins(char **cmd, char ***env);
 void			change_directory(char *argv, char **env);
 void			ft_setenv(char *name, char *value, char ***env, int nb_arg);
 char			**add_variable(char *name, char *value, char **env);
+char			**modif_variable(char *name, char *value, char **env);
+// char			**ft_unsetenv(char **args, char ***env);
+char			**ft_unsetenv(char **args, char ***env, int nb_arg);
+// char			**ft_unsetenv(char **args, char **env);
 
 /*
 **	--	error functions --

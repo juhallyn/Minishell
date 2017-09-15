@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 14:46:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/15 12:49:02 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/15 15:59:40 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**modif_variable(char *name, char *value, char **env)
 	return (env);
 }
 
-void			ft_setenv(char *name, char *value, char ***env, int nb_arg)
+void	ft_setenv(char *name, char *value, char ***env, int nb_arg)
 {
 	char	**tmp;
 
