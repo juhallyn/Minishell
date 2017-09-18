@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 15:34:46 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/15 14:52:40 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 10:55:04 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	print_env(char **env)
 	int		i;
 
 	i = 0;
+	if (env == NULL)
+	{
+		ft_putendl("env = NULL");
+		exit(-1);
+	}
 	while (env[i])
 	{
 		ft_putendl(env[i]);

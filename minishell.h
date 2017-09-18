@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/15 16:34:48 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:26:43 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef	enum	e_bool
 
 /*
 **	--	check and process functions --
-**		--> command.c
+**		--> process.c
 */
 
 void			process(char ***env, char *line);
@@ -58,9 +58,7 @@ void			change_directory(char *argv, char **env);
 void			ft_setenv(char *name, char *value, char ***env, int nb_arg);
 char			**add_variable(char *name, char *value, char **env);
 char			**modif_variable(char *name, char *value, char **env);
-// char			**ft_unsetenv(char **args, char ***env);
-char			**ft_unsetenv(char **args, char ***env, int nb_arg);
-// char			**ft_unsetenv(char **args, char **env);
+void			ft_unsetenv(char *name, char ***env, int nb_arg);
 
 /*
 **	--	error functions --

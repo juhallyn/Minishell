@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/14 16:45:00 by jle-quel         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:27:09 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,19 @@ static void		ft_fork(char **cmd, char *command_path, char **env)
 
 	 if (env)
 	 {
-	 pid = fork();
-	 if (pid == 0)
-	 {
-		 if (!command_path)
-		 	ft_error(cmd[0]);
-		 ret = execve(command_path, cmd, env);
-		 if (ret == -1)
-		 	ft_error(cmd[0]);
-	 }
-	 else
-	 	wait(&pid);
+		 pid = fork();
+		 if (pid == 0)
+		 {
+			 if (!command_path)
+			 	ft_error(cmd[0]);
+			 ret = execve(command_path, cmd, env);
+			 if (ret == -1)
+			 	ft_error(cmd[0]);
+	 	}
+	 	else
+	 		wait(&pid);
 	 }
 }
-void	ft_arraydel(char ***array);
 
 void		process(char ***env, char *line)
 {
@@ -41,6 +40,7 @@ void		process(char ***env, char *line)
 	char	**command;
 	t_bool	builtins;
 
+	env_var = NULL;
 	if (ft_strlen(line) == 0)
 		return ;
 	command = ft_strsplit(parse_line(line), ' ');
@@ -64,7 +64,7 @@ char		*path_command(char *command, char *env_path)
 
 	i = 0;
 	command_path = NULL;
-	if (!command)
+	if (!command || !env_path)
 		return (NULL);
 	all_paths = ft_strsplit(env_path, ':');
 	while (all_paths[i])

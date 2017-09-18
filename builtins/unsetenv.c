@@ -6,89 +6,78 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:58:07 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/15 16:39:33 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:21:19 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		**ft_init(char **env, int env_len, int new_size)
+static char		**delete_variable(char *name, char **env)
 {
 	char	**new_env;
 	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
-	new_env = NULL;
-	new_env = (char**)malloc(sizeof(char*) * (new_size + 1));
+	i = ft_arraylen(env) + 1;
+	new_env = (char**)malloc(sizeof(char*) * (i - 1));
 	if (!new_env)
 		exit(-1);
-	while (i < env_len)
+	i = 0;
+	while (env[i])
 	{
-		if (!env[i])
-			;
+		if (ft_strncmp(name, env[i], ft_strlen(name)) == 0)
+			i++;
 		else
 		{
 			new_env[j] = ft_strdup(env[i]);
 			j++;
+			i++;
 		}
-		i++;
 	}
 	new_env[j] = NULL;
 	return (new_env);
 }
 
-static char		**realloc_without_null(char **env, int env_len)
+void			ft_unsetenv(char *name, char ***env, int nb_arg)
 {
-	int		i;
-	int		new_size;
+	char	**tmp;
 
-	i = 0;
-	new_size = 0;
-	while (i < env_len)
-	{
-		if (!env[i])
-			;
-		else
-			new_size++;
-	}
-	return (ft_init(env, env_len, new_size));
+	tmp = *env;
+	*env = delete_variable(name, *env);
+	ft_arraydel(&tmp);
+	tmp = NULL;
 }
 
-char			**ft_unsetenv(char **args, char ***env, int nb_arg)
-{
-	int		i;
-	int		j;
-	int		env_len;
-	char	**new_env;
+// ft_putendl(*env[i]);
+// if (ft_strncmp(name, *env[i], ft_strlen(name)) == 0)
+// 	i++;
+// else
+// {
+// 	new_env[j] = ft_strdup(*env[i]);
+// 	j++;
+// }
+// i++;
 
-	new_env = NULL;
-	env_len = ft_arraylen(*env);
-	printf("len : %d\n", env_len);
-	i = 0;
-	j = 0;
-	while (args[j])
-	{
-		ft_putendl(args[j]);
-		j++;
-	}
-	while (i < env_len)
-	{
-		j = 1;
-		while (args[j])
-		{
-			if (ft_strncmp(args[j], *env[i], ft_strlen(args[j])) == 0)
-			{
-				// ft_putendl(args[j]);
-				// free(*env[i]);
-				// *env[i] = NULL;
-			}
-			j++;
-		}
-		// ft_putendl(*env[i]);
-		i++;
-	}
-	// new_env = realloc_without_null(*env, env_len);
-	// return (new_env);
-}
+
+
+// char	**new_env;
+// int		env_len;
+// int		i;
+// int		j;
+//
+// ft_putendl(name);
+// i = 0;
+// j = 0;
+// // env_len = ft_arraylen(*env) + 1;
+// // new_env = (char**)malloc(sizeof(char*) * (env_len - 1));
+// // if (!new_env)
+// 	// exit(-1);
+// while (env[i])
+// {
+// 	ft_putendl(env[i]);
+// 	i++;
+// }
+// // new_env[j] = NULL;
+// // ft_arraydel(env);
+// // *env = new_env;
