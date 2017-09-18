@@ -5,7 +5,7 @@ Lors de l'exécution de l'appel-système fork, le noyau effectue les opérations
 il alloue un bloc de contrôle dans la table des processus.
 il copie les informations contenues dans le bloc de contrôle du père dans celui du fils sauf les identificateurs (PID, PPID...).
 il alloue un PID au processus fils.
-il associe au processus fils un segment de texte dans son espace d'adressage. Le segment de données et la pile ne lui seront attribués 
+il associe au processus fils un segment de texte dans son espace d'adressage. Le segment de données et la pile ne lui seront attribués
 uniquement lorsque celui-ci tentera de les modifier. Cette technique, nommée « copie on write », permet de réduire le temps de création du processus.
 l'état du processus est mis à l'état exécution.
 
@@ -30,7 +30,7 @@ execute prog "./"
 
 		cd need 'x' permission
 
------	cd -> 
+-----	cd ->
 			check_is_file_exist;
 			check_right x
 
@@ -39,3 +39,18 @@ execute prog "./"
 			argc 1 = set argv[1] without data -- if var exist delete data;
 			argc 2 = set argv[1] with argv[2] data;
 			if (argc > 2) = print_error("setenv : Too many arguments.");
+
+
+
+
+str = "test $HOME foo";
+
+start_var = 5
+
+str = ft_strchr(str, $);
+
+str = $HOME foo;
+
+end_var = 4 + start_var;
+
+final_str = test ~ foo;

@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:50:16 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 15:15:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ t_bool		is_builtins(char *cmd)
 
 void		exec_builtins(char **cmd, char ***env)
 {
-	char	*home;
-	char	*path;
 	int		nb_arg;
 
 	nb_arg = count_arg_cmd(cmd);
@@ -57,4 +55,6 @@ void		exec_builtins(char **cmd, char ***env)
 		else
 			ft_unsetenv(cmd, env);
 	}
+	if (ft_strcmp(cmd[0], "echo") == 0)
+		ft_echo(cmd);
 }

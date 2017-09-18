@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 11:00:12 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/15 16:48:54 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:58:46 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		check_permission(char *cmd, char *file_name, char cmd_permissions)
 {
 	DIR		*dir;
 	struct	stat buff;
-	char	*error;
 
 	dir = opendir(file_name);
 	if (!dir)

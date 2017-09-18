@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:54:28 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 15:18:22 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,13 @@ void			ft_setenv(char *name, char *value, char ***env, int nb_arg);
 */
 
 void			ft_unsetenv(char **args, char ***env);
+
+/*
+**				--	echo builtins --
+**					--> echo.c
+*/
+
+void			ft_echo(char **args);
 
 /*
 **			--	END builtins --

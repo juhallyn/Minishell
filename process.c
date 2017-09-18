@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:32:45 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 15:56:40 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static void		ft_fork(char **cmd, char *command_path, char **env)
 	 	else
 	 		wait(&pid);
 	 }
+}
+
+static char		*exec_command(char *cmd)
+{
+	if (access(cmd, F_OK) == 0)
+		return (cmd);
+	return (NULL);
 }
 
 void		process(char ***env, char *line)
@@ -71,6 +78,7 @@ char		*path_command(char *command, char *env_path)
 	while (all_paths[i])
 	{
 		command_path = join(command_path, all_paths[i], command);
+		ft_putendl(command_path);
 		if (access(command_path, F_OK) == 0)
 		{
 			ft_arraydel(&all_paths);
@@ -78,6 +86,8 @@ char		*path_command(char *command, char *env_path)
 		}
 		i++;
 	}
+	if (exec_command(command))
+		return (command);
 	ft_strdel(&command_path);
 	ft_arraydel(&all_paths);
 	return (NULL);
