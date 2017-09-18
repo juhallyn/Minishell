@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:26:43 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:54:28 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,12 @@ char			*find_env(char **env, char *var_name);
 char			**env_cpy(char **env);
 
 /*
-**	--	run builtins functions --
-**		--> builtins.c
-**/
-
-t_bool			is_builtins(char *cmd);
-void			exec_builtins(char **cmd, char ***env);
-
-/*
-**	all builtins command are in "builtins"
-**		folder with $builtin_name.c
-*/
-
-void			change_directory(char *argv, char **env);
-void			ft_setenv(char *name, char *value, char ***env, int nb_arg);
-char			**add_variable(char *name, char *value, char **env);
-char			**modif_variable(char *name, char *value, char **env);
-void			ft_unsetenv(char *name, char ***env, int nb_arg);
-
-/*
 **	--	error functions --
 **		--> error.c
 */
 
 void			print_error(char *cmd, char *error, char *file);
-int				check_permission(char *cmd, char *file_name, char cmd_permissions);
+int				check_permission(char *cmd, char *file_name, char cmd_perms);
 t_bool			permission_bool(struct stat *buff, char permission);
 
 /*
@@ -88,5 +69,48 @@ char			*creat_path(char *argv, char *d_name);
 int				count_arg_cmd(char **cmd);
 void			print_env(char **env);
 char			*join_env_data(char *name, char *value);
+
+/*
+**			--	BEGIN builtins --
+**	all builtins command are in "builtins"
+**				folder
+*/
+
+/*
+**				--	run builtins functions --
+**					--> builtins.c
+*/
+
+t_bool			is_builtins(char *cmd);
+void			exec_builtins(char **cmd, char ***env);
+
+/*
+**				--	cd builtins --
+**					--> cd.c
+*/
+
+void			change_directory(char *argv, char **env);
+
+/*
+**				--	setenv builtins --
+**					--> setenv.c
+*/
+
+char			**add_variable(char *name, char *value, char **env);
+char			**modif_variable(char *name, char *value, char **env);
+void			ft_setenv(char *name, char *value, char ***env, int nb_arg);
+
+/*
+**				--	unsetenv builtins --
+**					--> unsetenv.c
+*/
+
+void			ft_unsetenv(char **args, char ***env);
+
+/*
+**			--	END builtins --
+**	all builtins command are in "builtins"
+**				folder
+*/
 
 #endif

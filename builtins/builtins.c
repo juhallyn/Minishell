@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:00:53 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:50:16 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void		exec_builtins(char **cmd, char ***env)
 		if (!cmd[1])
 			ft_putendl_fd("unsetenv: Too few arguments.", 2);
 		else
-			ft_unsetenv(cmd[1], env, nb_arg);
+			ft_unsetenv(cmd, env);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:27:09 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 11:32:45 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		process(char ***env, char *line)
 	t_bool	builtins;
 
 	env_var = NULL;
+	command_path = NULL;
 	if (ft_strlen(line) == 0)
 		return ;
 	command = ft_strsplit(parse_line(line), ' ');
