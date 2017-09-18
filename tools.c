@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:38:07 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/14 11:56:18 by jle-quel         ###   ########.fr       */
+/*   Updated: 2017/09/18 16:28:00 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,6 @@ void	ft_error(char *cmd)
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(" command not found\n", 2);
 	exit(-1);
-}
-
-void	ft_strsplit_del(char ***tab)
-{
-	int		i;
-	char	**temp;
-
-	i = 0;
-	temp = *tab;
-	if (temp)
-	{
-		while (temp[i])
-		{
-			free(temp[i]);
-			temp[i] = NULL;
-			i++;
-		}
-	}
 }
 
 char	*join(char *command_path, char *env_path, char *command)

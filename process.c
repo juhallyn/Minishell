@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 15:56:40 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/18 17:49:41 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void		process(char ***env, char *line)
 		ft_fork(command, command_path, *env);
 	else
 		exec_builtins(command, env);
+	ft_strdel(&command_path);
 	ft_strdel(&env_var);
 	ft_arraydel(&command);
-	ft_strdel(&command_path);
 }
 
 char		*path_command(char *command, char *env_path)
@@ -84,11 +84,9 @@ char		*path_command(char *command, char *env_path)
 			ft_arraydel(&all_paths);
 			return (command_path);
 		}
+		ft_strdel(&command_path);
 		i++;
 	}
-	if (exec_command(command))
-		return (command);
-	ft_strdel(&command_path);
 	ft_arraydel(&all_paths);
-	return (NULL);
+	return (ft_strdup(command));
 }
