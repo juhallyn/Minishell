@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:57:22 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 16:52:23 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 17:26:20 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static inline void		env_var(char *str, char **env)
 
 	env_var = find_env(env, str + 1);
 	ft_putstr(env_var);
+	ft_strdel(&env_var);
 }
 
 void					ft_echo(char **args, char **env)

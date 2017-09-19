@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 11:00:12 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 16:46:36 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 18:33:25 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	print_error(char *cmd, char *error, char *file)
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(error, 2);
 	ft_putendl_fd(file, 2);
+	if (!file)
+		ft_putchar('\n');
 }
 
 t_bool	permission_bool(struct stat *buff, char permission)

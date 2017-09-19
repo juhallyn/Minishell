@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 16:51:32 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 19:11:07 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,22 @@ void			process(char ***env, char *line)
 
 	env_var = NULL;
 	command_path = NULL;
+	line = parse_line(line);
 	if (ft_strlen(line) == 0)
 		return ;
 	command = ft_strsplit(parse_line(line), ' ');
 	builtins = is_builtins(command[0]);
 	if ((env_var = find_env(*env, "PATH")))
 		command_path = path_command(command[0], env_var);
+	else
+		command_path = path_command(command[0], NULL);
 	if (builtins == false)
 		ft_fork(command, command_path, *env);
 	else
 		exec_builtins(command, env);
 	ft_strdel(&command_path);
-	ft_strdel(&env_var);
+	if (env_var)
+		ft_strdel(&env_var);
 	ft_arraydel(&command);
 }
 
@@ -65,8 +69,10 @@ char			*path_command(char *command, char *env_path)
 
 	i = 0;
 	command_path = NULL;
-	if (!command || !env_path)
+	if (!command)
 		return (NULL);
+	if (!env_path)
+		return (command);
 	all_paths = ft_strsplit(env_path, ':');
 	while (all_paths[i])
 	{

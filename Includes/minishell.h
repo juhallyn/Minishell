@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 16:54:12 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 17:48:06 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			exec_builtins(char **cmd, char ***env);
 **					--> cd.c
 */
 
-void			change_directory(char *argv, char **env);
+void			change_directory(char *argv, char ***env);
 
 /*
 **				--	setenv builtins --

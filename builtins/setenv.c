@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 14:46:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 10:58:46 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 19:03:08 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**modif_variable(char *name, char *value, char **env)
 void	ft_setenv(char *name, char *value, char ***env, int nb_arg)
 {
 	char	**tmp;
+	char	*memory;
 
 	if (nb_arg > 2)
 		ft_putendl_fd("setenv : Too many arguments.", 2);
@@ -63,7 +64,7 @@ void	ft_setenv(char *name, char *value, char ***env, int nb_arg)
 		print_env(*env);
 	else if (nb_arg == 2 || nb_arg == 1)
 	{
-		if (!(find_env(*env, name)))
+		if (!(memory = find_env(*env, name)))
 		{
 			tmp = *env;
 			*env = add_variable(name, value, *env);
@@ -71,6 +72,9 @@ void	ft_setenv(char *name, char *value, char ***env, int nb_arg)
 			tmp = NULL;
 		}
 		else
+		{
+			ft_strdel(&memory);
 			modif_variable(name, value, *env);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 16:00:00 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 18:01:49 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		exec_builtins(char **cmd, char ***env)
 
 	nb_arg = count_arg_cmd(cmd);
 	if (ft_strcmp(cmd[0], "cd") == 0)
-		change_directory(cmd[1], *env);
+		change_directory(cmd[1], env);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
 	{
 		if (!cmd[1])
