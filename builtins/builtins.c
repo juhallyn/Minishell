@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 16:14:24 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 15:15:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:00:00 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_bool		is_builtins(char *cmd)
 	int		i;
 
 	i = 0;
-	builtins = "cd,echo,exit,setenv,unsetenv";
+	builtins = "cd,echo,exit,setenv,unsetenv,env";
 	builtins_list = ft_strsplit(builtins, ',');
 	while (builtins_list[i])
 	{
@@ -56,5 +56,9 @@ void		exec_builtins(char **cmd, char ***env)
 			ft_unsetenv(cmd, env);
 	}
 	if (ft_strcmp(cmd[0], "echo") == 0)
-		ft_echo(cmd);
+		ft_echo(cmd, *env);
+	if (ft_strcmp(cmd[0], "env") == 0)
+		print_env(*env);
+	if (ft_strcmp(cmd[0], "exit") == 0)
+		exit(0);
 }

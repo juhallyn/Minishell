@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 17:49:41 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:51:32 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,26 @@
 
 static void		ft_fork(char **cmd, char *command_path, char **env)
 {
-	 pid_t	pid;
-	 int	ret;
+	pid_t	pid;
+	int		ret;
 
-	 if (env)
-	 {
-		 pid = fork();
-		 if (pid == 0)
-		 {
-			 if (!command_path)
-			 	ft_error(cmd[0]);
-			 ret = execve(command_path, cmd, env);
-			 if (ret == -1)
-			 	ft_error(cmd[0]);
-	 	}
-	 	else
-	 		wait(&pid);
-	 }
+	if (env)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			if (!command_path)
+				ft_error(cmd[0]);
+			ret = execve(command_path, cmd, env);
+			if (ret == -1)
+				ft_error(cmd[0]);
+		}
+		else
+			wait(&pid);
+	}
 }
 
-static char		*exec_command(char *cmd)
-{
-	if (access(cmd, F_OK) == 0)
-		return (cmd);
-	return (NULL);
-}
-
-void		process(char ***env, char *line)
+void			process(char ***env, char *line)
 {
 	char	*env_var;
 	char	*command_path;
@@ -64,7 +57,7 @@ void		process(char ***env, char *line)
 	ft_arraydel(&command);
 }
 
-char		*path_command(char *command, char *env_path)
+char			*path_command(char *command, char *env_path)
 {
 	char	**all_paths;
 	char	*command_path;
@@ -78,7 +71,6 @@ char		*path_command(char *command, char *env_path)
 	while (all_paths[i])
 	{
 		command_path = join(command_path, all_paths[i], command);
-		ft_putendl(command_path);
 		if (access(command_path, F_OK) == 0)
 		{
 			ft_arraydel(&all_paths);

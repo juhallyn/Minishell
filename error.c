@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 11:00:12 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 11:58:46 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:46:36 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	permission_bool(struct stat *buff, char permission)
 
 	owner = buff->st_mode & S_IRWXU;
 	if (permission == 'r')
-	 	return (owner & S_IRUSR ? true : false);
+		return (owner & S_IRUSR ? true : false);
 	if (permission == 'w')
 		return (owner & S_IWUSR ? true : false);
 	if (permission == 'x')
@@ -35,8 +35,8 @@ t_bool	permission_bool(struct stat *buff, char permission)
 
 int		check_permission(char *cmd, char *file_name, char cmd_permissions)
 {
-	DIR		*dir;
-	struct	stat buff;
+	DIR			*dir;
+	struct stat buff;
 
 	dir = opendir(file_name);
 	if (!dir)

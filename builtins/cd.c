@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 13:47:32 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/11 13:54:20 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:52:04 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	change_directory(char *argv, char **env)
 	home = find_env(env, "HOME");
 	if (argv)
 	{
-		if (check_permission("cd" ,argv, 'x') != -1)
+		if (check_permission("cd", argv, 'x') != -1)
 			chdir(argv);
 	}
 	else

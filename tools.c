@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:38:07 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 16:28:00 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:45:42 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char	*join(char *command_path, char *env_path, char *command)
 
 char	*creat_path(char *argv, char *d_name)
 {
-	char    *path;
-	size_t  len;
+	char	*path;
+	size_t	len;
 
 	if (!argv || !d_name)
 		return (NULL);
