@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 17:09:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/20 14:55:30 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/20 16:12:46 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,17 @@ static void		ft_fork(char **cmd, char *command_path, char **env)
 	pid_t	pid;
 	int		ret;
 
-	if (env)
+	pid = fork();
+	if (pid == 0)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			if (!command_path)
-				ft_error(cmd[0]);
-			ret = execve(command_path, cmd, env);
-			if (ret == -1)
-				ft_error(cmd[0]);
-		}
-		else
-			wait(&pid);
+		if (!command_path)
+			ft_error(cmd[0]);
+		ret = execve(command_path, cmd, env);
+		if (ret == -1)
+			ft_error(cmd[0]);
 	}
+	else
+		wait(&pid);
 }
 
 void			process(char ***env, char *line)
@@ -45,7 +42,7 @@ void			process(char ***env, char *line)
 	line = parse_line(line);
 	if (ft_strlen(line) == 0)
 		return ;
-	command = ft_strsplit(parse_line(line), ' ');
+	command = ft_strsplit(line, ' ');
 	builtins = is_builtins(command[0]);
 	if ((env_var = find_env(*env, "PATH")))
 		command_path = path_command(command[0], env_var);
@@ -72,7 +69,7 @@ char			*path_command(char *command, char *env_path)
 	if (!command)
 		return (NULL);
 	if (!env_path)
-		return (command);
+		return (ft_strdup(command));
 	all_paths = ft_strsplit(env_path, ':');
 	while (all_paths[i])
 	{

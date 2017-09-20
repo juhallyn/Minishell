@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 14:46:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 19:03:08 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:23:48 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ char	**add_variable(char *name, char *value, char **env)
 	if (!new_env)
 		exit(-1);
 	i = 0;
-	while (env[i])
+	if (env)
 	{
-		new_env[i] = ft_strdup(env[i]);
-		i++;
+		while (env[i])
+		{
+			new_env[i] = ft_strdup(env[i]);
+			i++;
+		}
 	}
 	new_env[i] = data;
 	new_env[i + 1] = NULL;
@@ -68,7 +71,8 @@ void	ft_setenv(char *name, char *value, char ***env, int nb_arg)
 		{
 			tmp = *env;
 			*env = add_variable(name, value, *env);
-			ft_arraydel(&tmp);
+			if (tmp)
+				ft_arraydel(&tmp);
 			tmp = NULL;
 		}
 		else

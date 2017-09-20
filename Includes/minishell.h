@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:19:26 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 17:48:06 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:12:06 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char			*creat_path(char *argv, char *d_name);
 int				count_arg_cmd(char **cmd);
 void			print_env(char **env);
 char			*join_env_data(char *name, char *value);
+char			*escape_chars(char *str);
 
 /*
 **			--	BEGIN builtins --

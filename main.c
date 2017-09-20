@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/20 14:52:08 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:13:24 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		main(int argc, char **argv, char **env)
 	{
 		ft_putstr("$> ");
 		get_next_line(0, &line);
+		line = escape_chars(line);
 		process(&my_env, line);
 		ft_strdel(&line);
 	}

@@ -6,7 +6,7 @@
 #    By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/03 18:24:18 by juhallyn          #+#    #+#              #
-#    Updated: 2017/09/11 14:02:18 by juhallyn         ###   ########.fr        #
+#    Updated: 2017/09/20 18:26:55 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,21 @@ PURPLE	=	echo "\x1b[35m $1 \x1b[0m $2"
 
 NAME	=	minishell
 
-SRC 	=	alias.c			\
-			env.c			\
-			error.c			\
-			main.c			\
-			process			\
-			tools			\
-			# #	builtins
-			# builtins/cd.c
-
+SRC 	=	env.c					\
+			error.c					\
+			exec.c					\
+			main.c					\
+			process.c				\
+			tools.c					\
+			tools2.c				\
+			builtins/builtins.c		\
+			builtins/cd.c			\
+			builtins/echo.c			\
+			builtins/setenv.c		\
+			builtins/unsetenv.c		\
 
 LIB		=	libft/
+INC		=	Includes/
 
 #_Compilation_#
 
@@ -46,7 +50,7 @@ norm:
 
 $(NAME):
 	make -C $(LIB)
-	@gcc $(FLAG) $(SRC) $(LIB)libft.a -o $(NAME)
+	@gcc $(FLAG) $(SRC) -I $(INC) $(LIB)libft.a -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)

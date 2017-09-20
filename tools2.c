@@ -6,11 +6,27 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 15:34:46 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/18 10:55:04 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:24:48 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*escape_chars(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] >= '\t' && str[i] <= '\r')
+			str[i] = ' ';
+		i++;
+	}
+	return (str);
+}
 
 void	print_env(char **env)
 {
@@ -18,10 +34,7 @@ void	print_env(char **env)
 
 	i = 0;
 	if (env == NULL)
-	{
-		ft_putendl("env = NULL");
-		exit(-1);
-	}
+		return ;
 	while (env[i])
 	{
 		ft_putendl(env[i]);

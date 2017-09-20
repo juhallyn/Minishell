@@ -1,7 +1,0 @@
-alias.c
-cd.c
-env.c
-error.c
-main.c
-process.c
-tools.c
