@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/19 16:45:11 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/20 14:52:08 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		main(int argc, char **argv, char **env)
 	(void)argv;
 	my_env = NULL;
 	line = NULL;
-	my_env = env_cpy(env);
+	if (*env)
+		my_env = env_cpy(env);
 	while (42)
 	{
 		ft_putstr("$> ");
