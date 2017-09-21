@@ -6,7 +6,7 @@
 #    By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/03 18:24:18 by juhallyn          #+#    #+#              #
-#    Updated: 2017/09/20 18:26:55 by juhallyn         ###   ########.fr        #
+#    Updated: 2017/09/21 15:10:15 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,25 +20,31 @@ PURPLE	=	echo "\x1b[35m $1 \x1b[0m $2"
 
 NAME	=	minishell
 
-SRC 	=	env.c					\
-			error.c					\
-			exec.c					\
-			main.c					\
-			process.c				\
-			tools.c					\
-			tools2.c				\
-			builtins/builtins.c		\
-			builtins/cd.c			\
-			builtins/echo.c			\
-			builtins/setenv.c		\
-			builtins/unsetenv.c		\
+SRC 	=	env.c			\
+			error.c			\
+			exec.c			\
+			main.c			\
+			process.c		\
+			tools.c			\
+			tools2.c		\
+			builtins.c		\
+			cd.c			\
+			echo.c			\
+			setenv.c		\
+			unsetenv.c		\
 
-LIB		=	libft/
-INC		=	Includes/
+OBJS		=	$(SRC:.c=.o)
+
+LIB			=	libft/
+INC			=	Includes/
+OBJS_DIR	=	objs/
+SRCS_DIR	=	srcs/
+SRCS_LIST	=	$(addprefix $(SRCS_DIR), $(SRC))
+OBJS_LIST	=	$(addprefix $(OBJS_DIR), $(OBJS))
 
 #_Compilation_#
 
-FLAG 	=	-Wall -Wextra #-Werror
+FLAG 	=	-Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -50,10 +56,12 @@ norm:
 
 $(NAME):
 	make -C $(LIB)
-	@gcc $(FLAG) $(SRC) -I $(INC) $(LIB)libft.a -o $(NAME)
+	gcc $(FLAG) -c $(SRCS_LIST) -I $(INC)
+	mv $(OBJS) $(OBJS_DIR)
+	gcc $(FLAG) $(OBJS_LIST) -I $(INC) $(LIB)libft.a -o $(NAME)
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJS_LIST)
 	@(cd $(LIB) && $(MAKE) $@)
 
 fclean:
