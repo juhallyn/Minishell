@@ -6,13 +6,29 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 13:47:32 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/20 16:47:24 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/21 16:50:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	change_directory(char *argv, char ***env)
+static void		to_home(char ***env, char *old_pwd)
+{
+	char	*home;
+
+	home = find_env(*env, "HOME");
+	if (check_permission("cd", home, 'x') != -1)
+	{
+		chdir(home);
+		if (old_pwd)
+			ft_setenv("OLDPWD", old_pwd, env, 2);
+		ft_setenv("PWD", home, env, 2);
+	}
+	if (home)
+		ft_strdel(&home);
+}
+
+void			change_directory(char *argv, char ***env)
 {
 	char	*home;
 	char	*old_pwd;
@@ -31,16 +47,7 @@ void	change_directory(char *argv, char ***env)
 		}
 	}
 	else
-	{
-		if (check_permission("cd", home, 'x') != -1)
-		{
-			chdir(home);
-			if (old_pwd)
-				ft_setenv("OLDPWD", old_pwd, env, 2);
-			ft_setenv("PWD", home, env, 2);
-		}
-	}
+		to_home(env, old_pwd);
 	if (old_pwd)
 		ft_strdel(&old_pwd);
-	ft_strdel(&home);
 }
