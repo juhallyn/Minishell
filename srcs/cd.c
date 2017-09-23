@@ -30,12 +30,10 @@ static void		to_home(char ***env, char *old_pwd)
 
 void			change_directory(char *argv, char ***env)
 {
-	char	*home;
 	char	*old_pwd;
 	char	buff[4096 + 1];
 
 	old_pwd = find_env(*env, "PWD");
-	home = find_env(*env, "HOME");
 	if (argv)
 	{
 		if (check_permission("cd", argv, 'x') != -1)
