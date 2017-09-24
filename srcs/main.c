@@ -25,7 +25,7 @@ int		main(int argc, char **argv, char **env)
 		my_env = env_cpy(env);
 	while (42)
 	{
-		ft_putstr("\x1B[32m$> \x1B[0m");
+		ft_putstr("minishell \x1B[32m$> \x1B[0m");
 		get_next_line(0, &line);
 		line = escape_chars(line);
 		process(&my_env, line);

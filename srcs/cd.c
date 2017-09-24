@@ -28,6 +28,21 @@ static void		to_home(char ***env, char *old_pwd)
 		ft_strdel(&home);
 }
 
+static void		to_old_pwd(char ***env)
+{
+	char	*old_pwd;
+	char	buff[4096 + 1];
+	
+	old_pwd = find_env(*env, "OLDPWD");
+	ft_putendl(old_pwd);
+	if (check_permission("cd", old_pwd, 'x') != -1)
+	{
+		ft_setenv("OLDPWD", getcwd(buff, 4096), env, 2);
+		chdir(old_pwd);
+		ft_setenv("PWD", getcwd(buff, 4096), env, 2);
+	}
+}
+
 void			change_directory(char *argv, char ***env)
 {
 	char	*old_pwd;
@@ -36,7 +51,9 @@ void			change_directory(char *argv, char ***env)
 	old_pwd = find_env(*env, "PWD");
 	if (argv)
 	{
-		if (check_permission("cd", argv, 'x') != -1)
+		if (ft_strcmp(argv, "-") == 0)
+			to_old_pwd(env);
+		else if (check_permission("cd", argv, 'x') != -1)
 		{
 			chdir(argv);
 			if (old_pwd)
