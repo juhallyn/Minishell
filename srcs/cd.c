@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 13:47:32 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/21 16:50:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/25 11:36:19 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		to_old_pwd(char ***env)
 {
 	char	*old_pwd;
 	char	buff[4096 + 1];
-	
+
 	old_pwd = find_env(*env, "OLDPWD");
 	ft_putendl(old_pwd);
 	if (check_permission("cd", old_pwd, 'x') != -1)

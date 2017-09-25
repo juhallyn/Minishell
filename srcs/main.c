@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 11:18:37 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/21 15:26:35 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/25 11:33:53 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		main(int argc, char **argv, char **env)
 {
 	char	**my_env;
 	char	*line;
+	char	buff[4096 + 1];
 
 	(void)argc;
 	(void)argv;
@@ -23,9 +24,11 @@ int		main(int argc, char **argv, char **env)
 	line = NULL;
 	if (*env)
 		my_env = env_cpy(env);
+	else
+		ft_setenv("PWD", getcwd(buff, 4096), &my_env, 2);
 	while (42)
 	{
-		ft_putstr("minishell \x1B[32m$> \x1B[0m");
+		ft_putstr("\x1B[34mMinishell \x1B[32m$> \x1B[0m");
 		get_next_line(0, &line);
 		line = escape_chars(line);
 		process(&my_env, line);
