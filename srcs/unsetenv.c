@@ -6,7 +6,7 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:58:07 by juhallyn          #+#    #+#             */
-/*   Updated: 2017/09/20 16:47:27 by juhallyn         ###   ########.fr       */
+/*   Updated: 2017/09/25 15:40:25 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char		**delete_variable(char *name, char **env)
 	if (!new_env)
 		exit(-1);
 	i = 0;
+	if (!env)
+		return (NULL);
 	while (env[i])
 	{
 		if (ft_strncmp(name, env[i], ft_strlen(name)) == 0)
