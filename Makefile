@@ -6,7 +6,7 @@
 #    By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/03 18:24:18 by juhallyn          #+#    #+#              #
-#    Updated: 2017/09/21 15:10:15 by juhallyn         ###   ########.fr        #
+#    Updated: 2017/10/05 14:19:58 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ norm:
 $(NAME):
 	make -C $(LIB)
 	gcc $(FLAG) -c $(SRCS_LIST) -I $(INC)
+	mkdir -p $(OBJS_DIR)
 	mv $(OBJS) $(OBJS_DIR)
 	gcc $(FLAG) $(OBJS_LIST) -I $(INC) $(LIB)libft.a -o $(NAME)
 
@@ -64,7 +65,7 @@ clean:
 	rm -f $(OBJS_LIST)
 	@(cd $(LIB) && $(MAKE) $@)
 
-fclean:
+fclean: clean
 	make fclean -C $(LIB)
 	@rm -f $(OBJ)
 	@rm -f $(NAME)
